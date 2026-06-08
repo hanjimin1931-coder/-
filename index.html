@@ -3,192 +3,481 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>감염성 질환의 예방과 신약개발</title>
+
 <style>
+
+:root{
+--main:#00d4ff;
+--dark:#08111f;
+--card:#122033;
+--text:#ffffff;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Pretendard',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
 body{
-    margin:0;
-    font-family:'맑은 고딕',sans-serif;
-    background:#f5f8fc;
-    color:#333;
+background:var(--dark);
+color:var(--text);
+overflow-x:hidden;
 }
-header{
-    background:#2b6cb0;
-    color:white;
-    text-align:center;
-    padding:50px;
+
+/* 진행바 */
+
+#progress{
+position:fixed;
+top:0;
+left:0;
+height:5px;
+width:0%;
+background:var(--main);
+z-index:9999;
 }
+
+/* Hero */
+
+.hero{
+
+height:100vh;
+
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+
+text-align:center;
+
+background:
+linear-gradient(
+135deg,
+#08111f,
+#10233e,
+#163b5f
+);
+
+}
+
+.hero h1{
+font-size:4rem;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:1.3rem;
+max-width:700px;
+}
+
+.start-btn{
+margin-top:30px;
+padding:15px 30px;
+background:var(--main);
+border:none;
+border-radius:30px;
+cursor:pointer;
+font-size:1rem;
+font-weight:bold;
+}
+
 nav{
-    background:#1e4e8c;
-    padding:15px;
-    text-align:center;
+position:sticky;
+top:0;
+background:rgba(0,0,0,.6);
+backdrop-filter:blur(10px);
+padding:20px;
+text-align:center;
+z-index:1000;
 }
+
 nav a{
-    color:white;
-    text-decoration:none;
-    margin:15px;
-    font-weight:bold;
+color:white;
+margin:15px;
+text-decoration:none;
 }
+
 section{
-    width:85%;
-    margin:30px auto;
-    background:white;
-    padding:25px;
-    border-radius:12px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+padding:100px 10%;
 }
+
 h2{
-    color:#2b6cb0;
+font-size:2.5rem;
+margin-bottom:30px;
+color:var(--main);
 }
+
+/* 카드 */
+
+.grid{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+
+gap:20px;
+}
+
 .card{
-    background:#e8f1fb;
-    padding:15px;
-    margin:15px 0;
-    border-radius:10px;
+background:var(--card);
+padding:30px;
+border-radius:20px;
+transition:.4s;
+cursor:pointer;
 }
-footer{
-    background:#1e4e8c;
-    color:white;
-    text-align:center;
-    padding:20px;
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 25px var(--main);
 }
+
+/* 집단면역 */
+
+#people{
+font-size:2rem;
+line-height:2;
+margin-top:20px;
+}
+
+/* 타임라인 */
+
+.timeline{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+}
+
+.step{
+background:var(--card);
+padding:20px;
+border-radius:20px;
+width:180px;
+text-align:center;
+}
+
+/* 팝업 */
+
+.popup{
+
+display:none;
+
+position:fixed;
+top:50%;
+left:50%;
+
+transform:
+translate(-50%,-50%);
+
+background:#122033;
+
+padding:30px;
+
+border-radius:20px;
+
+width:80%;
+max-width:500px;
+
+z-index:9999;
+}
+
+.popup button{
+margin-top:20px;
+padding:10px 20px;
+}
+
+.dark-toggle{
+
+position:fixed;
+right:20px;
+bottom:20px;
+
+background:var(--main);
+border:none;
+
+width:60px;
+height:60px;
+
+border-radius:50%;
+cursor:pointer;
+}
+
 </style>
 </head>
+
 <body>
-<header>
-    <h1>감염성 질환의 예방과 신약개발</h1>
-    <p>생명과학 교과 내용과 진로 탐구</p>
-</header>
+
+<div id="progress"></div>
+
+<section class="hero">
+
+<h1 id="typing"></h1>
+
+<p>
+병원체의 감염 경로부터
+백신 개발,
+그리고 신약개발 연구원까지 탐구해보자.
+</p>
+
+<button
+class="start-btn"
+onclick="location.href='#infection'">
+탐구 시작
+</button>
+
+</section>
+
 <nav>
-    <a href="#route">감염 경로</a>
-    <a href="#vaccine">백신의 원리</a>
-    <a href="#herd">집단 면역</a>
-    <a href="#type">백신 종류</a>
-    <a href="#career">신약개발 진로</a>
+
+<a href="#infection">감염 경로</a>
+<a href="#vaccine">백신 원리</a>
+<a href="#herd">집단 면역</a>
+<a href="#types">백신 종류</a>
+<a href="#career">신약개발</a>
+
 </nav>
-<section id="route">
-<h2>1. 병원체의 감염 경로</h2>
-<p>
-감염성 질환은 병원체가 인체에 침입하여 발생한다.
-병원체는 다양한 경로를 통해 전파된다.
-</p>
+
+<section id="infection">
+
+<h2>🦠 병원체의 감염 경로</h2>
+
+<div class="grid">
+
 <div class="card">
-<h3>🤧 비말 감염</h3>
-<p>기침이나 재채기를 통해 전파된다.</p>
+🤧
+<h3>비말 감염</h3>
+<p>기침, 재채기를 통해 전파</p>
 </div>
+
 <div class="card">
-<h3>💧 오염된 물</h3>
-<p>병원체가 포함된 물을 섭취하여 감염된다.</p>
+💧
+<h3>오염된 물</h3>
+<p>병원체가 포함된 물 섭취</p>
 </div>
+
 <div class="card">
-<h3>🍱 상한 음식</h3>
-<p>세균이나 바이러스에 오염된 음식을 통해 감염된다.</p>
+🍱
+<h3>오염된 음식</h3>
+<p>세균과 바이러스 감염</p>
 </div>
+
 <div class="card">
-<h3>🦟 모기·진드기</h3>
-<p>병원체를 가진 매개 생물에 의해 전파된다.</p>
+🦟
+<h3>매개 생물</h3>
+<p>모기, 진드기 등</p>
 </div>
-<div class="card">
-<h3>🩹 상처 감염</h3>
-<p>피부의 상처를 통해 병원체가 침입한다.</p>
+
 </div>
+
 </section>
+
 <section id="vaccine">
-<h2>2. 백신을 통한 감염성 질환 예방</h2>
-<p>
-백신은 병원체의 일부 또는 약화된 병원체를 이용하여
-우리 몸이 미리 면역 반응을 일으키도록 만든다.
-</p>
-<h3>백신의 원리</h3>
-<ol>
-<li>백신 접종</li>
-<li>항원이 체내에 들어옴</li>
-<li>B림프구와 T림프구가 활성화됨</li>
-<li>항체 생성</li>
-<li>기억세포 형성</li>
-<li>실제 병원체 침입 시 빠른 면역 반응</li>
-</ol>
-<p>
-이 과정을 통해 감염성 질환을 효과적으로 예방할 수 있다.
-</p>
+
+<h2>💉 백신의 원리</h2>
+
+<div class="timeline">
+
+<div class="step">① 백신 접종</div>
+<div class="step">② 항원 인식</div>
+<div class="step">③ 항체 생성</div>
+<div class="step">④ 기억세포 형성</div>
+<div class="step">⑤ 감염 예방</div>
+
+</div>
+
 </section>
+
 <section id="herd">
-<h2>3. 집단 면역</h2>
-<p>
-많은 사람이 백신을 접종하면 병원체의 전파가 감소한다.
-이를 집단 면역이라고 한다.
-</p>
-<div class="card">
-<h3>접종률이 낮을 때</h3>
-<p>병원체가 빠르게 확산되어 감염자가 증가한다.</p>
-</div>
-<div class="card">
-<h3>접종률이 높을 때</h3>
-<p>전파 경로가 차단되어 감염이 크게 감소한다.</p>
-</div>
-<p>
-집단 면역은 백신을 접종하기 어려운 사람들까지 보호할 수 있다.
-</p>
+
+<h2>👥 집단 면역 시뮬레이터</h2>
+
+<input
+type="range"
+min="0"
+max="100"
+value="70"
+oninput="updatePeople(this.value)">
+
+<p id="rate">접종률 : 70%</p>
+
+<div id="people"></div>
+
 </section>
-<section id="type">
-<h2>4. 다양한 종류의 백신</h2>
-<div class="card">
-<h3>약독화 생백신</h3>
-<p>
-병원체의 독성을 약하게 만들어 사용한다.
-강한 면역 반응을 유도할 수 있다.
-</p>
+
+<section id="types">
+
+<h2>🔬 백신 종류</h2>
+
+<div class="grid">
+
+<div class="card"
+onclick="showInfo('약독화 생백신','독성을 약하게 만든 병원체 사용')">
+약독화 생백신
 </div>
-<div class="card">
-<h3>불활성화 백신</h3>
-<p>
-병원체를 죽인 후 사용한다.
-안전성이 높다.
-</p>
+
+<div class="card"
+onclick="showInfo('불활성화 백신','병원체를 죽여 제작')">
+불활성화 백신
 </div>
-<div class="card">
-<h3>재조합 단백질 백신</h3>
-<p>
-병원체의 특정 단백질만 이용하여 제작한다.
-</p>
+
+<div class="card"
+onclick="showInfo('재조합 백신','특정 단백질만 이용')">
+재조합 백신
 </div>
-<div class="card">
-<h3>mRNA 백신</h3>
-<p>
-병원체 단백질을 만드는 유전 정보를 전달하여
-면역 반응을 유도한다.
-</p>
+
+<div class="card"
+onclick="showInfo('mRNA 백신','유전정보를 이용한 최신 백신')">
+mRNA 백신
 </div>
+
+</div>
+
 </section>
+
 <section id="career">
-<h2>5. 신약개발 연구원</h2>
-<p>
-나는 신약개발 분야에 관심이 있다.
-생명과학에서 배우는 병원체의 감염 경로와 백신의 원리는
-신약개발의 기초가 되는 중요한 내용이다.
-</p>
-<h3>신약개발 과정</h3>
-<ol>
-<li>병원체 분석</li>
-<li>항원 탐색</li>
-<li>후보 물질 개발</li>
-<li>백신 설계</li>
-<li>임상시험</li>
-<li>의약품 허가</li>
-</ol>
-<h3>관련 학과</h3>
-<ul>
-<li>제약공학과</li>
-<li>약학과</li>
-<li>생명공학과</li>
-<li>바이오의약학과</li>
-</ul>
-<p>
-신약개발 연구원은 새로운 백신과 치료제를 개발하여
-감염성 질환으로부터 사람들을 보호하는 역할을 한다.
-</p>
+
+<h2>🧪 신약개발 연구원</h2>
+
+<div class="timeline">
+
+<div class="step">병원체 분석</div>
+<div class="step">항원 탐색</div>
+<div class="step">백신 설계</div>
+<div class="step">임상시험</div>
+<div class="step">승인 및 출시</div>
+
+</div>
+
 </section>
-<footer>
-생명과학 교과 내용과 연계한 진로 탐구 웹사이트
-</footer>
+
+<div class="popup" id="popup">
+
+<h3 id="popupTitle"></h3>
+<p id="popupText"></p>
+
+<button onclick="closePopup()">닫기</button>
+
+</div>
+
+<button
+class="dark-toggle"
+onclick="toggleDark()">
+🌙
+</button>
+
+<script>
+
+/* 타이핑 효과 */
+
+const text=
+"감염성 질환의 예방과 신약개발";
+
+let i=0;
+
+function typing(){
+
+if(i<text.length){
+
+document.getElementById("typing")
+.innerHTML+=text.charAt(i);
+
+i++;
+
+setTimeout(typing,100);
+
+}
+
+}
+
+typing();
+
+/* 집단면역 */
+
+function updatePeople(value){
+
+document.getElementById("rate")
+.innerHTML=
+"접종률 : "+value+"%";
+
+let green=
+Math.floor(value/5);
+
+let html="";
+
+for(let i=0;i<20;i++){
+
+html +=
+i<green ? "🟢" : "🔴";
+
+if((i+1)%5==0)
+html+="<br>";
+
+}
+
+document.getElementById("people")
+.innerHTML=html;
+
+}
+
+updatePeople(70);
+
+/* 팝업 */
+
+function showInfo(title,text){
+
+document.getElementById("popup")
+.style.display="block";
+
+document.getElementById("popupTitle")
+.innerHTML=title;
+
+document.getElementById("popupText")
+.innerHTML=text;
+
+}
+
+function closePopup(){
+
+document.getElementById("popup")
+.style.display="none";
+
+}
+
+/* 진행바 */
+
+window.onscroll=()=>{
+
+let winScroll=
+document.documentElement.scrollTop;
+
+let height=
+document.documentElement.scrollHeight-
+document.documentElement.clientHeight;
+
+let scrolled=
+(winScroll/height)*100;
+
+document.getElementById("progress")
+.style.width=
+scrolled+"%";
+
+};
+
+/* 다크모드 */
+
+function toggleDark(){
+
+document.body.classList.toggle("light");
+
+}
+
+</script>
+
 </body>
 </html>
