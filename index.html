@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>감염성 질환의 예방과 신약개발</title>
+
+<title>병원체와 신약개발</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -11,7 +17,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'맑은 고딕',sans-serif;
+font-family:'Pretendard',sans-serif;
 }
 
 html{
@@ -19,474 +25,1194 @@ scroll-behavior:smooth;
 }
 
 body{
-background:#08111f;
+
+background:linear-gradient(135deg,#06172f,#0b3b67,#0e6ba8);
+
 color:white;
+
 overflow-x:hidden;
+
 }
 
-/* 진행바 */
+/* 배경 원 */
 
-#progress{
+body::before{
+
+content:"";
+
 position:fixed;
-top:0;
-left:0;
-width:0%;
-height:5px;
-background:#00d4ff;
-z-index:9999;
+
+width:700px;
+
+height:700px;
+
+background:#00ffe544;
+
+border-radius:50%;
+
+top:-250px;
+
+left:-200px;
+
+filter:blur(90px);
+
+animation:move1 12s infinite alternate;
+
+z-index:-2;
+
 }
 
-/* 메인 */
+body::after{
 
-.hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-background:linear-gradient(
-135deg,
-#08111f,
-#10233e,
-#163b5f
-);
-padding:20px;
+content:"";
+
+position:fixed;
+
+width:600px;
+
+height:600px;
+
+background:#0055ff33;
+
+border-radius:50%;
+
+bottom:-250px;
+
+right:-150px;
+
+filter:blur(80px);
+
+animation:move2 15s infinite alternate;
+
+z-index:-2;
+
 }
 
-.hero h1{
-font-size:4rem;
-margin-bottom:20px;
+@keyframes move1{
+
+from{
+
+transform:translate(0,0);
+
 }
 
-.hero p{
-font-size:1.2rem;
-max-width:700px;
+to{
+
+transform:translate(150px,100px);
+
 }
 
-.hero a{
-margin-top:30px;
-background:#00d4ff;
-color:#08111f;
-padding:15px 30px;
-border-radius:30px;
-text-decoration:none;
-font-weight:bold;
+}
+
+@keyframes move2{
+
+from{
+
+transform:translate(0,0);
+
+}
+
+to{
+
+transform:translate(-100px,-120px);
+
+}
+
 }
 
 /* 메뉴 */
 
 nav{
-position:sticky;
+
+position:fixed;
+
 top:0;
-background:rgba(0,0,0,.7);
+
+left:0;
+
+width:100%;
+
+background:rgba(0,0,0,.35);
+
 backdrop-filter:blur(10px);
-padding:15px;
-text-align:center;
+
+display:flex;
+
+justify-content:center;
+
+gap:35px;
+
+padding:18px;
+
+z-index:999;
+
 }
 
 nav a{
+
 color:white;
+
 text-decoration:none;
-margin:0 15px;
+
+font-weight:600;
+
+transition:.3s;
+
 }
 
-/* 섹션 */
+nav a:hover{
+
+color:#5dfff2;
+
+}
+
+/* Hero */
+
+.hero{
+
+height:100vh;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+padding:30px;
+
+}
+
+.hero h1{
+
+font-size:65px;
+
+margin-bottom:25px;
+
+animation:fadeDown 1s;
+
+}
+
+.hero p{
+
+font-size:22px;
+
+max-width:900px;
+
+line-height:1.8;
+
+opacity:.9;
+
+animation:fadeUp 1.5s;
+
+}
+
+.hero button{
+
+margin-top:50px;
+
+padding:18px 45px;
+
+border:none;
+
+border-radius:50px;
+
+background:#00d0ff;
+
+color:white;
+
+font-size:20px;
+
+cursor:pointer;
+
+transition:.35s;
+
+}
+
+.hero button:hover{
+
+transform:scale(1.08);
+
+background:#34ffe3;
+
+color:#003049;
+
+}
+
+@keyframes fadeDown{
+
+from{
+
+opacity:0;
+
+transform:translateY(-50px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(50px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* 공통 */
 
 section{
-padding:100px 10%;
+
+padding:120px 10%;
+
 }
 
-h2{
-color:#00d4ff;
-margin-bottom:30px;
-font-size:2.5rem;
+.title{
+
+font-size:42px;
+
+text-align:center;
+
+margin-bottom:60px;
+
 }
 
-/* 카드 */
+.card-wrap{
 
-.grid{
 display:grid;
-grid-template-columns:
-repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
+
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+gap:30px;
+
 }
 
 .card{
-background:#122033;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(10px);
+
 padding:30px;
+
 border-radius:20px;
-text-align:center;
-cursor:pointer;
-transition:.3s;
+
+transition:.4s;
+
+box-shadow:0 10px 25px rgba(0,0,0,.3);
+
 }
 
 .card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 25px #00d4ff;
+
+transform:translateY(-12px) scale(1.03);
+
+background:rgba(255,255,255,.15);
+
 }
 
-.card span{
-font-size:3rem;
-display:block;
-margin-bottom:10px;
+.card h3{
+
+margin-bottom:18px;
+
+font-size:28px;
+
+color:#72fff6;
+
 }
 
-/* 집단면역 */
+.card p{
 
-.herd{
-text-align:center;
+line-height:1.8;
+
+font-size:17px;
+
 }
 
-#people{
-font-size:2rem;
-line-height:2;
-margin-top:20px;
+.hidden{
+
+opacity:0;
+
+transform:translateY(70px);
+
+transition:1s;
+
 }
 
-/* 팝업 */
+.show{
 
-.modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.8);
-z-index:99999;
+opacity:1;
+
+transform:translateY(0);
+
 }
 
-.modal-content{
+/* 병원체 카드 */
+
+.pathogen{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+
+gap:25px;
+
+}
+
+.pathogen .item{
+
 background:white;
-color:black;
-max-width:600px;
-width:80%;
-margin:10% auto;
-padding:30px;
+
+color:#00334b;
+
+padding:35px;
+
 border-radius:20px;
+
+text-align:center;
+
+transition:.4s;
+
 }
 
-.close{
-float:right;
-font-size:30px;
-cursor:pointer;
+.pathogen .item:hover{
+
+transform:rotate(-2deg) scale(1.05);
+
 }
 
-/* 다크모드 버튼 */
+.pathogen span{
 
-#darkBtn{
-position:fixed;
-right:20px;
-bottom:20px;
-width:60px;
-height:60px;
-border:none;
-border-radius:50%;
-background:#00d4ff;
-cursor:pointer;
-font-size:1.2rem;
+font-size:60px;
+
+display:block;
+
+margin-bottom:20px;
+
 }
 
-/* 밝은 모드 */
+/* 순서 */
 
-.light{
-background:#f4f9ff;
-color:#111;
+.timeline{
+
+display:flex;
+
+flex-direction:column;
+
+gap:25px;
+
+align-items:center;
+
 }
 
-.light .card{
-background:white;
-color:#111;
+.step{
+
+width:80%;
+
+padding:20px;
+
+background:rgba(255,255,255,.1);
+
+border-left:6px solid cyan;
+
+border-radius:15px;
+
+font-size:22px;
+
 }
 
-.light nav{
-background:#1565c0;
+footer{
+
+text-align:center;
+
+padding:40px;
+
+background:#04111f;
+
+margin-top:100px;
+
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div id="progress"></div>
-
-<div class="hero">
-
-<h1 id="typing"></h1>
-
-<p>
-생명과학 교과서의 감염성 질환 예방 단원을
-신약개발 진로와 연계하여 탐구해보자.
-</p>
-
-<a href="#infection">
-탐구 시작하기
-</a>
-
-</div>
-
 <nav>
 
-<a href="#infection">감염 경로</a>
-<a href="#vaccine">백신</a>
-<a href="#herd">집단면역</a>
-<a href="#career">신약개발</a>
+<a href="#home">홈</a>
+
+<a href="#science">교과 내용</a>
+
+<a href="#pathogen">병원체</a>
+
+<a href="#drug">신약개발</a>
+
+<a href="#career">진로</a>
+
+<a href="#reflection">성찰</a>
 
 </nav>
 
-<section id="infection">
+<section class="hero" id="home">
 
-<h2>🦠 병원체의 감염 경로</h2>
+<h1>🧬 병원체와 신약개발</h1>
 
-<div class="grid">
+<p>
 
-<div class="card"
-onclick="showInfo(
-'비말 감염',
-'기침이나 재채기를 통해 병원체가 전파되는 방식이다. 독감과 코로나19가 대표적인 예이다.'
-)">
-<span>🤧</span>
-비말 감염
-</div>
+생명과학Ⅰ(2022 개정 교육과정)의 병원체 단원을 중심으로
 
-<div class="card"
-onclick="showInfo(
-'오염된 물',
-'병원체가 포함된 물을 마시거나 사용하여 감염된다. 콜레라가 대표적이다.'
-)">
-<span>💧</span>
-오염된 물
-</div>
+감염 원리와 신약개발 과정을 탐구하고,
 
-<div class="card"
-onclick="showInfo(
-'오염된 음식',
-'세균이나 바이러스에 오염된 음식을 먹어 감염된다.'
-)">
-<span>🍱</span>
-오염된 음식
-</div>
+신약개발 연구원의 역할과 미래 진로를 알아보는 웹사이트입니다.
 
-<div class="card"
-onclick="showInfo(
-'매개 생물',
-'모기나 진드기 같은 생물이 병원체를 옮긴다.'
-)">
-<span>🦟</span>
-매개 생물
-</div>
-
-</div>
-
-</section>
-
-<section id="vaccine">
-
-<h2>💉 백신의 원리</h2>
-
-<p style="font-size:1.2rem;line-height:2;">
-백신은 병원체의 일부를 이용하여 우리 몸이
-미리 항체와 기억세포를 만들도록 한다.
-실제 병원체가 침입했을 때 빠르게 면역 반응을 일으켜
-질병을 예방할 수 있다.
 </p>
 
-</section>
+<button onclick="document.getElementById('science').scrollIntoView()">
 
-<section id="herd">
+탐구 시작하기
 
-<h2>👥 집단면역 시뮬레이터</h2>
-
-<div class="herd">
-
-<input
-type="range"
-min="0"
-max="100"
-value="70"
-oninput="updatePeople(this.value)">
-
-<p id="rate">접종률 : 70%</p>
-
-<div id="people"></div>
-
-<p id="status"></p>
-
-</div>
-
-</section>
-
-<section id="career">
-
-<h2>🧪 신약개발 연구원</h2>
-
-<p style="line-height:2;font-size:1.1rem;">
-병원체의 특성을 연구하고,
-효과적인 백신과 치료제를 개발하는 직업이다.
-생명과학에서 배우는 면역과 백신의 원리는
-신약개발의 기초가 된다.
-</p>
-
-</section>
-
-<!-- 팝업 -->
-
-<div id="modal" class="modal">
-
-<div class="modal-content">
-
-<span class="close"
-onclick="closeInfo()">
-×
-</span>
-
-<h2 id="modalTitle"></h2>
-
-<p id="modalText"></p>
-
-</div>
-
-</div>
-
-<button id="darkBtn"
-onclick="toggleDark()">
-🌙
 </button>
+
+</section>
+
+<section id="science">
+
+<h2 class="title hidden">
+
+📚 생명과학Ⅰ 교과 내용
+
+</h2>
+
+<div class="card-wrap">
+
+<div class="card hidden">
+
+<h3>병원체</h3>
+
+<p>
+
+병원체는 사람에게 질병을 일으키는 생물 또는 비생물성 감염원이다.
+
+대표적으로 바이러스, 세균, 진균, 원생생물이 있으며
+
+각각 구조와 증식 방법이 다르다.
+
+</p>
+
+</div>
+
+<div class="card hidden">
+
+<h3>감염</h3>
+
+<p>
+
+병원체가 숙주에 침입하여 증식하는 과정을 말한다.
+
+우리 몸은 면역계를 이용하여 병원체를 제거하며,
+
+예방접종은 면역 기억을 형성하는 중요한 방법이다.
+
+</p>
+
+</div>
+
+<div class="card hidden">
+
+<h3>면역</h3>
+
+<p>
+
+선천 면역과 후천 면역이 존재하며,
+
+항체와 기억세포는 같은 병원체가 다시 침입했을 때
+
+빠르게 제거하도록 돕는다.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+<section id="pathogen">
+
+<h2 class="title hidden">
+🦠 병원체의 종류
+</h2>
+
+<div class="pathogen">
+
+<div class="item hidden">
+<span>🦠</span>
+<h3>바이러스</h3>
+<p>
+세포 구조가 없는 비세포성 병원체이다.
+혼자서는 증식할 수 없으며 반드시 숙주 세포 안에서만
+증식한다. 감기, 독감, 코로나19 등이 대표적인 예이다.
+</p>
+</div>
+
+<div class="item hidden">
+<span>🧫</span>
+<h3>세균</h3>
+<p>
+원핵생물로 이루어진 병원체이다.
+항생제를 이용하여 치료할 수 있지만,
+항생제 내성균의 증가가 새로운 문제로 떠오르고 있다.
+</p>
+</div>
+
+<div class="item hidden">
+<span>🍄</span>
+<h3>진균</h3>
+<p>
+곰팡이나 효모와 같은 균류이다.
+무좀이나 칸디다증 등을 일으키며,
+항진균제를 이용하여 치료한다.
+</p>
+</div>
+
+<div class="item hidden">
+<span>🦠</span>
+<h3>원생생물</h3>
+<p>
+단세포 진핵생물로 이루어진 병원체이다.
+말라리아 원충처럼 사람에게 질병을
+일으키는 종도 존재한다.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="drug">
+
+<h2 class="title hidden">
+💊 병원체와 신약개발
+</h2>
+
+<div class="card-wrap">
+
+<div class="card hidden">
+<h3>왜 병원체를 연구할까?</h3>
+
+<p>
+신약은 병원체의 약점을 정확하게 공격해야 한다.
+따라서 병원체의 구조와 유전자,
+증식 과정, 단백질의 기능을 먼저 분석해야
+효과적인 치료제를 만들 수 있다.
+</p>
+
+</div>
+
+<div class="card hidden">
+
+<h3>표적(Target) 탐색</h3>
+
+<p>
+병원체가 살아가는 데 반드시 필요한
+단백질이나 효소를 찾는다.
+
+이 단백질을 공격하면 병원체는
+증식하지 못하게 된다.
+
+이를 '표적'이라고 한다.
+</p>
+
+</div>
+
+<div class="card hidden">
+
+<h3>후보물질 개발</h3>
+
+<p>
+표적 단백질을 억제할 수 있는
+새로운 화합물을 설계한다.
+
+수천~수만 개의 후보물질을
+실험하여 가장 효과적인 약을 찾는다.
+</p>
+
+</div>
+
+</div>
+
+<br><br><br>
+
+<h2 class="title hidden">
+🔬 신약개발 과정
+</h2>
+
+<div class="timeline">
+
+<div class="step hidden">
+① 병원체 발견 및 질병 분석
+</div>
+
+<div class="step hidden">
+⬇
+</div>
+
+<div class="step hidden">
+② 병원체 유전자와 단백질 분석
+</div>
+
+<div class="step hidden">
+⬇
+</div>
+
+<div class="step hidden">
+③ 치료 표적(Target) 선정
+</div>
+
+<div class="step hidden">
+⬇
+</div>
+
+<div class="step hidden">
+④ 후보물질 설계 및 탐색
+</div>
+
+<div class="step hidden">
+⬇
+</div>
+
+<div class="step hidden">
+⑤ 세포 실험(In vitro)
+</div>
+
+<div class="step hidden">
+⬇
+</div>
+
+<div class="step hidden">
+⑥ 동물실험(In vivo)
+</div>
+
+<div class="step hidden">
+⬇
+</div>
+
+<div class="step hidden">
+⑦ 임상시험(1·2·3상)
+</div>
+
+<div class="step hidden">
+⬇
+</div>
+
+<div class="step hidden">
+⑧ 신약 허가 및 환자 치료
+</div>
+
+</div>
+
+</section>
+
+  <section id="career">
+
+<h2 class="title hidden">
+👨‍🔬 신약개발 관련 진로
+</h2>
+
+<div class="card-wrap">
+
+<div class="card hidden">
+
+<h3>의약화학 연구원</h3>
+
+<p>
+
+새로운 약이 될 수 있는 화합물을 설계하고
+합성하는 연구를 수행한다.
+
+화학적 구조를 바꾸어 효과는 높이고
+부작용은 줄이는 것이 주요 업무이다.
+
+</p>
+
+</div>
+
+<div class="card hidden">
+
+<h3>약리학 연구원</h3>
+
+<p>
+
+개발한 약물이 인체에서 어떻게 작용하는지
+연구한다.
+
+약의 효과와 작용 기전을 분석하며
+최적의 용량을 결정한다.
+
+</p>
+
+</div>
+
+<div class="card hidden">
+
+<h3>독성평가 연구원</h3>
+
+<p>
+
+후보물질의 안전성을 확인한다.
+
+간, 신장, 심장 등에 독성이 있는지
+실험을 통해 평가한다.
+
+</p>
+
+</div>
+
+<div class="card hidden">
+
+<h3>임상개발 연구원</h3>
+
+<p>
+
+사람을 대상으로 하는 임상시험을
+계획하고 관리한다.
+
+신약의 안전성과 효과를 검증하여
+허가를 받을 수 있도록 한다.
+
+</p>
+
+</div>
+
+<div class="card hidden">
+
+<h3>바이오의약품 연구원</h3>
+
+<p>
+
+항체 치료제, 백신,
+유전자 치료제 등을 개발한다.
+
+최근 가장 빠르게 성장하는
+신약개발 분야 중 하나이다.
+
+</p>
+
+</div>
+
+<div class="card hidden">
+
+<h3>AI 신약개발 연구원</h3>
+
+<p>
+
+인공지능을 이용하여
+후보물질을 예측하고
+신약 개발 시간을 단축한다.
+
+최근 제약 산업에서
+매우 중요한 분야로 성장하고 있다.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="title hidden">
+🧪 실제 신약개발 사례
+</h2>
+
+<div class="card-wrap">
+
+<div class="card hidden">
+
+<h3>COVID-19 mRNA 백신</h3>
+
+<p>
+
+코로나19 바이러스의 스파이크 단백질을
+표적으로 하여 mRNA 백신이 개발되었다.
+
+병원체의 유전정보를 분석한 후
+짧은 시간 안에 백신을 개발한
+대표적인 사례이다.
+
+</p>
+
+</div>
+
+<div class="card hidden">
+
+<h3>항생제 개발</h3>
+
+<p>
+
+세균의 세포벽 합성을 방해하거나
+단백질 합성을 억제하여
+
+세균만 선택적으로 제거하는
+약물을 개발한다.
+
+하지만 항생제 내성균의 증가로
+새로운 항생제 개발이 계속 필요하다.
+
+</p>
+
+</div>
+
+<div class="card hidden">
+
+<h3>항바이러스제</h3>
+
+<p>
+
+바이러스의 증식 과정에서
+필요한 효소를 억제하여
+
+바이러스가 복제되지 못하도록
+막는 원리이다.
+
+독감 치료제와 코로나19 치료제가
+대표적인 예이다.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="title hidden">
+📚 생명과학 교과와 신약개발의 연계
+</h2>
+
+<table style="width:100%;border-collapse:collapse;background:white;color:#00334b;border-radius:15px;overflow:hidden;">
+
+<tr style="background:#00d4ff;color:white;">
+
+<th style="padding:18px;">생명과학Ⅰ 교과 내용</th>
+
+<th>신약개발에서의 활용</th>
+
+</tr>
+
+<tr>
+
+<td style="padding:15px;">병원체</td>
+
+<td style="padding:15px;">
+감염 원인 분석 및 치료 표적 탐색
+</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:15px;">면역</td>
+
+<td style="padding:15px;">
+백신 및 항체 치료제 개발
+</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:15px;">유전자</td>
+
+<td style="padding:15px;">
+유전자 치료제 및 맞춤형 치료
+</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:15px;">단백질</td>
+
+<td style="padding:15px;">
+표적 단백질을 이용한 신약 설계
+</td>
+
+</tr>
+
+<tr>
+
+<td style="padding:15px;">생명공학</td>
+
+<td style="padding:15px;">
+바이오의약품 및 신기술 개발
+</td>
+
+</tr>
+
+</table>
+
+</section>
+<section id="quiz">
+
+<h2 class="title hidden">
+📝 학습 퀴즈
+</h2>
+
+<div class="card hidden">
+
+<h3>Q1. 다음 중 세포 구조가 없는 병원체는?</h3>
+
+<button class="quizBtn" onclick="checkAnswer(this,false)">① 세균</button><br><br>
+
+<button class="quizBtn" onclick="checkAnswer(this,true)">② 바이러스</button><br><br>
+
+<button class="quizBtn" onclick="checkAnswer(this,false)">③ 진균</button><br><br>
+
+<button class="quizBtn" onclick="checkAnswer(this,false)">④ 원생생물</button>
+
+<p id="result1"></p>
+
+</div>
+
+<br><br>
+
+<div class="card hidden">
+
+<h3>Q2. 신약개발에서 가장 먼저 수행하는 과정은?</h3>
+
+<button class="quizBtn" onclick="checkAnswer2(this,true)">① 병원체 분석</button><br><br>
+
+<button class="quizBtn" onclick="checkAnswer2(this,false)">② 임상시험</button><br><br>
+
+<button class="quizBtn" onclick="checkAnswer2(this,false)">③ 약 판매</button><br><br>
+
+<button class="quizBtn" onclick="checkAnswer2(this,false)">④ 약 복용</button>
+
+<p id="result2"></p>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="title hidden">
+🎯 나의 진로 다짐
+</h2>
+
+<div class="card hidden">
+
+<p style="font-size:19px;line-height:2;">
+
+생명과학Ⅰ에서 배우는 병원체 단원을 탐구하면서
+질병의 원인을 정확히 이해하는 것이
+신약개발의 시작이라는 사실을 알게 되었다.
+
+앞으로 화학과 생명과학을 더욱 깊이 공부하여
+병원체를 효과적으로 치료할 수 있는
+신약을 개발하는 연구원이 되고 싶다.
+
+사람들의 생명을 지키는 의약품을 개발하는 것이
+나의 가장 큰 목표이다.
+
+</p>
+
+</div>
+
+</section>
+
+<section id="reflection">
+
+<h2 class="title hidden">
+📖 성찰일지
+</h2>
+
+<div class="card hidden">
+
+<p style="line-height:2;font-size:18px;">
+
+이번 웹사이트를 제작하면서
+생명과학Ⅰ에서 배우는 병원체 단원이
+단순히 암기해야 하는 내용이 아니라
+
+실제 신약개발 과정과 매우 밀접하게 연결되어 있다는 점을
+깊이 이해하게 되었다.
+
+병원체의 구조와 증식 원리를 알아야
+효과적인 치료 표적을 찾을 수 있고,
+이를 바탕으로 새로운 치료제를 개발한다는 사실이
+가장 인상 깊었다.
+
+또한 HTML과 CSS를 이용하여
+교과 내용을 직접 정리하면서
+복잡한 내용을 체계적으로 구성하는 능력도
+향상되었다.
+
+이번 활동을 통해
+생명과학과 화학을 더욱 열심히 공부하여
+사람들의 건강에 기여하는
+신약개발 연구원이 되고 싶다는 목표가
+더욱 확고해졌다.
+
+</p>
+
+</div>
+
+</section>
+
+<footer>
+
+<h2>🧬 병원체와 신약개발</h2>
+
+<br>
+
+<p>
+생명과학Ⅰ(2022 개정 교육과정) 수행평가
+</p>
+
+<br>
+
+<p>
+
+제작 : ○○고등학교 ○학년 ○○○
+
+</p>
+
+</footer>
+
+<style>
+
+.quizBtn{
+
+padding:12px 25px;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-size:17px;
+
+background:#00d4ff;
+
+color:white;
+
+transition:.3s;
+
+}
+
+.quizBtn:hover{
+
+transform:scale(1.05);
+
+background:#49ffe5;
+
+color:#00334b;
+
+}
+
+#result1,#result2{
+
+margin-top:20px;
+
+font-size:20px;
+
+font-weight:bold;
+
+}
+
+</style>
 
 <script>
 
-/* 타이핑 */
+const observer=new IntersectionObserver(entries=>{
 
-const text =
-"감염성 질환의 예방과 신약개발";
+entries.forEach(entry=>{
 
-let i = 0;
+if(entry.isIntersecting){
 
-function typing(){
+entry.target.classList.add("show");
 
-if(i < text.length){
+}
 
-document
-.getElementById("typing")
-.innerHTML += text.charAt(i);
+});
 
-i++;
+});
 
-setTimeout(typing,100);
+document.querySelectorAll(".hidden").forEach(el=>{
+
+observer.observe(el);
+
+});
+
+function checkAnswer(btn,correct){
+
+if(correct){
+
+document.getElementById("result1").innerHTML="✅ 정답입니다!";
+
+document.getElementById("result1").style.color="#7CFC00";
+
+}else{
+
+document.getElementById("result1").innerHTML="❌ 다시 생각해보세요.";
+
+document.getElementById("result1").style.color="tomato";
 
 }
 
 }
 
-typing();
+function checkAnswer2(btn,correct){
 
-/* 팝업 */
+if(correct){
 
-function showInfo(title,text){
+document.getElementById("result2").innerHTML="✅ 정답입니다!";
 
-document
-.getElementById("modalTitle")
-.innerHTML = title;
+document.getElementById("result2").style.color="#7CFC00";
 
-document
-.getElementById("modalText")
-.innerHTML = text;
+}else{
 
-document
-.getElementById("modal")
-.style.display = "block";
+document.getElementById("result2").innerHTML="❌ 다시 생각해보세요.";
+
+document.getElementById("result2").style.color="tomato";
 
 }
-
-function closeInfo(){
-
-document
-.getElementById("modal")
-.style.display = "none";
-
-}
-
-/* 집단면역 */
-
-function updatePeople(value){
-
-document
-.getElementById("rate")
-.innerHTML =
-"접종률 : " + value + "%";
-
-let vaccinated =
-Math.floor(value/5);
-
-let html="";
-
-for(let i=0;i<20;i++){
-
-html +=
-i < vaccinated ? "🟢" : "🔴";
-
-if((i+1)%5===0){
-html += "<br>";
-}
-
-}
-
-document
-.getElementById("people")
-.innerHTML = html;
-
-let msg="";
-
-if(value<40){
-msg="감염 위험이 매우 높습니다.";
-}
-else if(value<70){
-msg="집단 면역이 충분하지 않습니다.";
-}
-else{
-msg="집단 면역이 형성됩니다.";
-}
-
-document
-.getElementById("status")
-.innerHTML = msg;
-
-}
-
-updatePeople(70);
-
-/* 진행바 */
-
-window.onscroll=function(){
-
-let winScroll=
-document.documentElement.scrollTop;
-
-let height=
-document.documentElement.scrollHeight-
-document.documentElement.clientHeight;
-
-let scrolled=
-(winScroll/height)*100;
-
-document
-.getElementById("progress")
-.style.width=
-scrolled+"%";
-
-};
-
-/* 다크모드 */
-
-function toggleDark(){
-
-document.body
-.classList.toggle("light");
 
 }
 
 </script>
 
 </body>
+
 </html>
